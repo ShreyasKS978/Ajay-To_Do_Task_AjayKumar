@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const app = express();
 const port = process.env.PORT || 3027; // Use PORT from .env or default to 3000
-const ipAddress = process.env.HOST || '0.0.0.0'; // Use HOST from .env or default to all interfaces
+const ipAddress = process.env.HOST || '13.201.55.224'; // Use HOST from .env or default to all interfaces
 
 // PostgreSQL connection configuration
 const pool = new Pool({
