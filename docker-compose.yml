@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: ajay_postgres
+    ports:
+      - "6586:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: new_employee_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - tasknet
+
+  backend:
+    build: ./Backend
+    container_name: ajay_backend
+    ports:
+      - "3027:3027"
+    depends_on:
+      - postgres
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: admin123
+      DB_HOST: ajay_postgres
+      DB_PORT: 5432
+      DB_NAME: new_employee_db
+      PORT: 3027
+      HOST: 0.0.0.0
+    restart: unless-stopped
+    networks:
+      - tasknet
+
+  frontend:
+    build: ./Frontend
+    container_name: ajay_frontend
+    ports:
+      - "8106:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - tasknet
+
+  hr_page:
+    build: ./HR_Page
+    container_name: ajay_hr_page
+    ports:
+      - "8107:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - tasknet
+
+volumes:
+  db_data:
+
+networks:
+  tasknet:
+
