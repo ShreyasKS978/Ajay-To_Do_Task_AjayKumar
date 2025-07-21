@@ -5,7 +5,7 @@ services:
     image: postgres:13
     container_name: ajay_postgres
     ports:
-      - "6586:5432"
+      - "6627:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123
@@ -40,7 +40,7 @@ services:
     build: ./Frontend
     container_name: ajay_frontend
     ports:
-      - "8106:80"
+      - "8192:80"
     depends_on:
       - backend
     restart: unless-stopped
@@ -51,7 +51,7 @@ services:
     build: ./HR_Page
     container_name: ajay_hr_page
     ports:
-      - "8107:80"
+      - "8193:80"
     depends_on:
       - backend
     restart: unless-stopped
