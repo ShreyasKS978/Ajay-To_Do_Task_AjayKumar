@@ -1,3 +1,4 @@
+-- Create tasks table
 CREATE TABLE IF NOT EXISTS tasks (
     id VARCHAR(255) PRIMARY KEY,
     task_name VARCHAR(25) NOT NULL,
@@ -10,11 +11,14 @@ CREATE TABLE IF NOT EXISTS tasks (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create task_history table (corrected)
 CREATE TABLE IF NOT EXISTS task_history (
     id SERIAL PRIMARY KEY,
     task_name VARCHAR(100) NOT NULL,
     employee_name VARCHAR(100) NOT NULL,
     employee_id VARCHAR(7) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
     upload_doc BYTEA,
     task_status VARCHAR(20) NOT NULL,
     allocated_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
